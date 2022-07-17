@@ -1,12 +1,19 @@
 #include <ros/ros.h>
 #include <geometry_msgs/Twist.h>
 #include <std_msgs/Int8.h>
+#include <std_msgs/Float32.h>
 using namespace std;
 
 int robot_mode=0;
 int stage = 0;
 int cou=0;
 
+int f_kyori = 0;
+
+void callback_range_front(const std_msgs::Float32& msg) {
+    //ROS_INFO("/range_front\t:\t%f\n\n", msg.data);
+    f_kyori =  msg.data;
+}
 
 void callback_robot_state(const std_msgs::Int8& msg) {
     if(msg.data<1)robot_mode=0;
@@ -23,6 +30,7 @@ int main(int argc, char **argv){
   geometry_msgs::Twist vel;
   std_msgs::Int8 fin;
   ros::Subscriber sub_robot_state = nh.subscribe("/robot_state", 100, callback_robot_state);
+  ros::Subscriber sub_range_front = nh.subscribe("/range_ahead", 100, callback_range_front);
   while (ros::ok()) {
     switch(stage){
       case 0:
@@ -51,6 +59,7 @@ int main(int argc, char **argv){
           cou=0;
           stage++;
         }
+        stage++;
         break;
       case 2:
         cou++;
@@ -61,9 +70,10 @@ int main(int argc, char **argv){
         vel.angular.y = 0.0;
         vel.angular.z = 0.0;
         pub_twist.publish(vel);
-        if(cou>=40){
+        // if(cou>=40){
+        if(f_kyori<0.3){
           cou=0;
-          stage++;
+          stage=8;//強制終了
         }
         break;
       case 3:

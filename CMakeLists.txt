@@ -215,3 +215,13 @@ add_executable(0-1_mileage_control_testing_node src/mileage_control_testing.cpp)
 target_link_libraries(0-1_mileage_control_testing_node
   ${catkin_LIBRARIES}
 )
+
+add_executable(0-2_angle_control_testing_node src/angle_control_testing.cpp)
+target_link_libraries(0-2_angle_control_testing_node
+  ${catkin_LIBRARIES}
+)
+
+add_executable(kyori_de_tomaru_node src/kyori_de_tomaru.cpp)
+target_link_libraries(kyori_de_tomaru_node
+  ${catkin_LIBRARIES}
+)
