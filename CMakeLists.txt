@@ -225,3 +225,8 @@ add_executable(kyori_de_tomaru_node src/kyori_de_tomaru.cpp)
 target_link_libraries(kyori_de_tomaru_node
   ${catkin_LIBRARIES}
 )
+
+add_executable(stop src/stop.cpp)
+target_link_libraries(stop
+  ${catkin_LIBRARIES}
+)
