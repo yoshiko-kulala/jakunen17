@@ -35,7 +35,7 @@ int main(int argc, char **argv){
         pub_twist.publish(vel);
         fin.data=0;
         pub_hand_task.publish(fin);
-        if(robot_mode==1)stage++;
+        //if(robot_mode==1)stage++;
         stage++;
         break;
       case 1:
@@ -156,11 +156,11 @@ int main(int argc, char **argv){
         vel.angular.y = 0.0;
         vel.angular.z = 0.0;
         pub_twist.publish(vel);
-        if(robot_mode==0)stage=0;
+        //if(robot_mode==0)stage=0;
         break;
     }
     //if(robot_mode==0)stage=0;
-    if(robot_mode==2)stage=99;
+    //if(robot_mode==2)stage=99;
     ros::spinOnce();
     rate.sleep();
   }

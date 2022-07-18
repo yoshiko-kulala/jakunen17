@@ -33,6 +33,9 @@ void callback_robot_state(const std_msgs::Int8& msg) {
 void callback_robot_ang(const std_msgs::Int8& msg) {
     ROS_INFO("/robot_ang\t:\t%d\n\n", msg.data);
 }
+void callback_tgt_ang(const std_msgs::Int8& msg) {
+    ROS_INFO("/tgt_ang\t:\t%d\n\n", msg.data);
+}
 
 int main(int argc, char **argv){
   ros::init(argc, argv, "jakunen17_master");
@@ -46,6 +49,7 @@ int main(int argc, char **argv){
   ros::Subscriber sub_img_left = nh.subscribe("/img_l", 100, callback_img_left);
   ros::Subscriber sub_robot_state = nh.subscribe("/robot_state", 100, callback_robot_state);
   ros::Subscriber sub_robot_ang = nh.subscribe("/robot_ang", 100, callback_robot_ang);
+  ros::Subscriber sub_tgt_ang = nh.subscribe("/tgt_ang", 100, callback_tgt_ang);
   ros::spin();
   return 0;
 }

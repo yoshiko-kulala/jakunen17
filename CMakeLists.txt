@@ -230,3 +230,8 @@ add_executable(stop src/stop.cpp)
 target_link_libraries(stop
   ${catkin_LIBRARIES}
 )
+
+add_executable(kensa src/kensa.cpp)
+target_link_libraries(kensa
+  ${catkin_LIBRARIES}
+)
