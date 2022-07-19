@@ -235,3 +235,8 @@ add_executable(kensa src/kensa.cpp)
 target_link_libraries(kensa
   ${catkin_LIBRARIES}
 )
+
+add_executable(kadai2 src/kadai2.cpp)
+target_link_libraries(kadai2
+  ${catkin_LIBRARIES}
+)

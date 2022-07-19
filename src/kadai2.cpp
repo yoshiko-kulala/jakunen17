@@ -69,7 +69,7 @@ int main(int argc, char **argv){
         //if(robot_mode==1)stage++;
         // stage++;
         stage++;
-      case 1: //まっすぐ
+      case 1: //後ろ
         cou++;
         vel.linear.x = sokudo;
         vel.linear.y = 0.0;
@@ -86,193 +86,8 @@ int main(int argc, char **argv){
           cou=0;
           stage++;//強制終了
         }
-        pub_twist.publish(vel);
         break; 
-    case 2: //右
-        cou++;
-        vel.linear.x = 0.0;
-        vel.linear.y = -1*sokudo;
-        vel.linear.z = 0.0;
-        vel.angular.x = 0.0;
-        vel.angular.y = 0.0;
-        vel.angular.z = 0.0;
-        //pub_twist.publish(vel);
-        // if(cou>=40){
-       if(r_kyori<0.65){
-          printf("aaaaa=\n");
-          vel.linear.y = -1*gensoku;
-        }
-       if(r_kyori<0.40 && r_kyori>0){
-          cou=0;
-          stage++;//強制終了
-        }
-        //pub_twist.publish(vel);
-        break;
-    case 3: //まっすぐ
-        cou++;
-        vel.linear.x = sokudo;
-        vel.linear.y = 0.0;
-        vel.linear.z = 0.0;
-        vel.angular.x = 0.0;
-        vel.angular.y = 0.0;
-        vel.angular.z = 0.0;
-        //pub_twist.publish(vel);
-        // if(cou>=40){
-        if(f_kyori<0.7){
-          printf("aaaaa=\n");
-          vel.linear.x = gensoku;
-        }
-        if(f_kyori<0.62 && f_kyori>0){
-          cou=0;
-          stage++;//強制終了
-        }
-        pub_twist.publish(vel);
-        break;
-    case 4://左向き
-        cou++;
-        vel.linear.x = 0.0;
-        vel.linear.y = 0.0;
-        vel.linear.z = 0.0;
-        vel.angular.x = 0.0;
-        vel.angular.y = 0.0;
-        vel.angular.z = 0.0;
-        ang_dir.data=2;
-        pub_tgt_ang.publish(ang_dir);
-        if(cou>=40){
-          cou=0;
-          stage++;
-        }
-        break;
-    case 5: //右合わせ
-        vel.linear.x = 0.0;
-        vel.linear.y = 0.0;
-        if(r_kyori>0.33){
-          printf("aaaaa=\n");
-          vel.linear.y = -0.5*gensoku;
-        }
-        if(r_kyori<=0.34 && r_kyori>=0){
-          cou=0;
-          stage++;//強制終了
-        }
-        pub_twist.publish(vel);
-        break;
-    case 6://左向き.まっすぐ
-        cou++;
-        vel.linear.x = sokudo;
-        vel.linear.y = 0.0;
-        vel.linear.z = 0.0;
-        vel.angular.x = 0.0;
-        vel.angular.y = 0.0;
-        vel.angular.z = 0.0;
-        //pub_twist.publish(vel);
-        // if(cou>=40){
-       if(r_kyori>0.35){
-          printf("aaaaa=\n");
-          vel.linear.y = gensoku;
-        }
-        if(r_kyori<0.34){
-          printf("aaaaa=\n");
-          vel.linear.y = gensoku;
-        }
-       if(f_kyori<0.41){
-          cou=0;
-          stage++;//強制終了
-        }
-        break;
-    case 7://左向き、後ろ1
-        cou++;
-        vel.linear.x = -1*sokudo;
-        vel.linear.y = 0.0;
-        vel.linear.z = 0.0;
-        vel.angular.x = 0.0;
-        vel.angular.y = 0.0;
-        vel.angular.z = 0.0;
-        //pub_twist.publish(vel);
-        // if(cou>=40){
-        if(r_kyori>0.38){
-          printf("aaaaa=\n");
-          vel.linear.y = -1*gensoku;
-        }
-        if(r_kyori<0.37){
-          printf("aaaaa=\n");
-          vel.linear.y = gensoku;
-        }
-        if(f_kyori<0.6){
-          printf("aaaaa=\n");
-          vel.linear.x = -1*gensoku;
-        }
-       if(l_kyori>0.5&&f_kyori>0.6){
-          cou=0;
-          stage++;//強制終了
-        }
-        break;
-     case 8://左向き、後ろ2
-        cou++;
-        vel.linear.x = -1*sokudo;
-        vel.linear.y = 0.0;
-        vel.linear.z = 0.0;
-        vel.angular.x = 0.0;
-        vel.angular.y = 0.0;
-        vel.angular.z = 0.0;
-        //pub_twist.publish(vel);
-        // if(cou>=40){
-       if(l_kyori<0.85){
-          printf("aaaaa=\n");
-          vel.linear.x = -1*gensoku;
-        }
-        if(b_kyori<0.43){
-          printf("aaaaa=\n");
-          vel.linear.x = -1*gensoku;
-        }
-        if(r_kyori>0.4){
-          printf("aaaaa=\n");
-          vel.linear.y = gensoku;
-        }
-       if(b_kyori<0.43){
-          cou=0;
-          stage++;//強制終了
-        }
-        break;
-    case 9://正面向き
-        cou++;
-        vel.linear.x = 0.0;
-        vel.linear.y = 0.0;
-        vel.linear.z = 0.0;
-        vel.angular.x = 0.0;
-        vel.angular.y = 0.0;
-        vel.angular.z = 0.0;
-        ang_dir.data=0;
-        pub_tgt_ang.publish(ang_dir);
-        if(cou>=40){
-          cou=0;
-          stage++;
-        }
-        break;
-    case 10: //正面向き、バック
-        cou++;
-        vel.linear.x = -1*sokudo;
-        vel.linear.y = 0.0;
-        vel.linear.z = 0.0;
-        vel.angular.x = 0.0;
-        vel.angular.y = 0.0;
-        vel.angular.z = 0.0;
-        //pub_twist.publish(vel);
-        // if(cou>=40){
-        if(b_kyori<0.6){
-          printf("aaaaa=\n");
-          vel.linear.x = -1*gensoku;
-        }
-        if(l_kyori>0.4&&l_kyori<0.65){
-          printf("aaaaa=\n");
-          vel.linear.y = gensoku;
-        }
-        if(b_kyori<0.38 && b_kyori>0){
-          cou=0;
-          stage++;//強制終了
-        }
-        pub_twist.publish(vel);
-        break;
-    case 11://右向き
+    case 2://東向き
         cou++;
         vel.linear.x = 0.0;
         vel.linear.y = 0.0;
@@ -287,7 +102,7 @@ int main(int argc, char **argv){
           stage++;
         }
         break;
-   case 12: //前向き、右
+   case 3: //東向き、前
         cou++;
         vel.linear.x = sokudo;
         vel.linear.y = 0.0;
@@ -297,17 +112,67 @@ int main(int argc, char **argv){
         vel.angular.z = 0.0;
         //pub_twist.publish(vel);
         // if(cou>=40){
-        if(r_kyori>0.34){
-          printf("aaaaa=\n");
-          vel.linear.y = -0.1*gensoku;
-        }
-        if(l_kyori>0.34){
-          printf("aaaaa=\n");
-          vel.linear.y = 0.1*gensoku;
-        }
-        if(f_kyori<0.40){
+        if(b_kyori<0.50){
           cou=0;
           stage++;//強制終了
+        }
+        break;
+    case 4://3秒待ち
+        cou++;
+        vel.linear.x = 0.0;
+        vel.linear.y = 0.0;
+        vel.linear.z = 0.0;
+        vel.angular.x = 0.0;
+        vel.angular.y = 0.0;
+        vel.angular.z = 0.0;
+        pub_twist.publish(vel);
+        if(cou>=30){
+          cou=0;
+          stage++;
+        }
+        break;
+    case 5: //東向き、前
+        cou++;
+        vel.linear.x = sokudo;
+        vel.linear.y = 0.0;
+        vel.linear.z = 0.0;
+        vel.angular.x = 0.0;
+        vel.angular.y = 0.0;
+        vel.angular.z = 0.0;
+        //pub_twist.publish(vel);
+        // if(cou>=40){
+        if(b_kyori<1.0){
+          cou=0;
+          stage++;//強制終了
+        }
+        break;
+      case 6://3秒待ち
+        cou++;
+        vel.linear.x = 0.0;
+        vel.linear.y = 0.0;
+        vel.linear.z = 0.0;
+        vel.angular.x = 0.0;
+        vel.angular.y = 0.0;
+        vel.angular.z = 0.0;
+        pub_twist.publish(vel);
+        if(cou>=30){
+          cou=0;
+          stage++;
+        }
+        break;
+      case 7://東向き
+        cou++;
+        vel.linear.x = 0.0;
+        vel.linear.y = 0.0;
+        vel.linear.z = 0.0;
+        vel.angular.x = 0.0;
+        vel.angular.y = 0.0;
+        vel.angular.z = 0.0;
+        ang_dir.data=3;
+        pub_tgt_ang.publish(ang_dir);
+        if(cou>=40){
+          cou=0;
+          stage++;
         }
         break;
     case 13://右向き、後ろ

@@ -2,6 +2,7 @@
 #include <geometry_msgs/Twist.h>
 #include <std_msgs/Int8.h>
 #include <std_msgs/Float32.h>
+#include <std_msgs/String.h>
 using namespace std;
 #include <stdio.h>
 
@@ -14,6 +15,8 @@ int f_kyori = 0;
 int b_kyori = 0;
 int r_kyori = 0;
 int l_kyori = 0;
+
+int log_flag=0;
 
 void callback_range_front(const std_msgs::Float32& msg) {
     //ROS_INFO("/range_front\t:\t%f\n\n", msg.data);
@@ -32,25 +35,32 @@ int main(int argc, char **argv){
   ros::Publisher pub_twist= nh.advertise<geometry_msgs::Twist>("/cmd_vel", 10);
   ros::Publisher pub_hand_task = nh.advertise<std_msgs::Int8>("/hand_tast", 10);
   ros::Publisher pub_tgt_ang = nh.advertise<std_msgs::Int8>("/tgt_ang", 10);
+  ros::Publisher pub_logger = nh.advertise<std_msgs::String>("/logger", 10);
+  std_msgs::String log_msg;
   ros::Rate rate(10);
   geometry_msgs::Twist vel;
   std_msgs::Int8 fin;
   ros::Subscriber sub_robot_state = nh.subscribe("/robot_state", 100, callback_robot_state);
   ros::Subscriber sub_range_front = nh.subscribe("/range_ahead", 100, callback_range_front);
+  
+  log_msg.data = "Sent a stop command to the robot";
   while (ros::ok()) {
-
-        vel.linear.x = 0.0;
-        vel.linear.y = 0.0;
-        vel.linear.z = 0.0;
-        vel.angular.x = 0.0;
-        vel.angular.y = 0.0;
-        vel.angular.z = 0.0;
-        pub_twist.publish(vel);
-        fin.data=0;
-        pub_hand_task.publish(fin);
-        //if(robot_mode==1)stage++;
-        ang_dir.data=0;
-        pub_tgt_ang.publish(ang_dir);
+    if(log_flag<4){
+      pub_logger.publish(log_msg);
+      log_flag++;
+    }
+    vel.linear.x = 0.0;
+    vel.linear.y = 0.0;
+    vel.linear.z = 0.0;
+    vel.angular.x = 0.0;
+    vel.angular.y = 0.0;
+    vel.angular.z = 0.0;
+    pub_twist.publish(vel);
+    fin.data=0;
+    pub_hand_task.publish(fin);
+    //if(robot_mode==1)stage++;
+    ang_dir.data=0;
+    pub_tgt_ang.publish(ang_dir);
 
     //if(robot_mode==0)stage=0;
     if(robot_mode==2)stage=99;
