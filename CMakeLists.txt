@@ -235,3 +235,9 @@ add_executable(kensa src/kensa.cpp)
 target_link_libraries(kensa
   ${catkin_LIBRARIES}
 )
+
+
+add_executable(kyori_de_tomaru2_node src/kyori_de_tomaru2.cpp)
+target_link_libraries(kyori_de_tomaru2_node
+  ${catkin_LIBRARIES}
+)
